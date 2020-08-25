@@ -8,15 +8,16 @@ package deliveryapp.objects;
 
 public class userObj {
  
-    private int Id;
+     private int Id;
     private String Nombre;
     private String Apellido;
     private String Telefono;
     private String Email;
     private String Pass;
     private String Type;
+    private int Placa;
 
-    public userObj(int pId, String pNombre, String pApellido, String pTelefono, String pEmail, String pPass, String pType) {
+    public userObj(int pId, String pNombre, String pApellido, String pTelefono, String pEmail, String pPass, String pType, int pPlaca) {
         setId(pId);
         setNombre(pNombre);
         setApellido(pApellido);
@@ -24,6 +25,7 @@ public class userObj {
         setEmail(pEmail);
         setPass(pPass);
         setType(pType);
+        setPlaca(pPlaca);
         
     }
 
@@ -81,6 +83,14 @@ public class userObj {
 
     private void setType(String pType) {
         this.Type = pType;
+    }
+    
+    public int getPlaca() {
+        return Placa;
+    }
+
+    private void setPlaca(int pPlaca) {
+        this.Placa = pPlaca;
     }
     
     

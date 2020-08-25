@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/JesúsAntonioBarahona/Documents/DataBasesMateria/Proyecto/ProyectoBD/DeliveryAppFinal/src/java/deliveryapp/logic/ordenLogic.java</file>
-            <file>file:/C:/Users/JesúsAntonioBarahona/Documents/DataBasesMateria/Proyecto/ProyectoBD/DeliveryAppFinal/src/java/deliveryapp/servlets/userServlet.java</file>
-            <file>file:/C:/Users/JesúsAntonioBarahona/Documents/DataBasesMateria/Proyecto/ProyectoBD/DeliveryAppFinal/src/java/deliveryapp/servlets/ordenServlet.java</file>
-            <file>file:/C:/Users/JesúsAntonioBarahona/Documents/DataBasesMateria/Proyecto/ProyectoBD/DeliveryAppFinal/web/ordenMain.jsp</file>
-            <file>file:/C:/Users/JesúsAntonioBarahona/Documents/DataBasesMateria/Proyecto/ProyectoBD/DeliveryAppFinal/src/java/deliveryapp/logic/userLogic.java</file>
+            <file>file:/C:/programacion1/DeliveryApp_BD/ProyectoBD%20-%20copia/DeliveryAppFinal/src/java/deliveryapp/objects/userObj.java</file>
+            <file>file:/C:/programacion1/DeliveryApp_BD/ProyectoBD%20-%20copia/DeliveryAppFinal/src/java/deliveryapp/servlets/userServlet.java</file>
+            <file>file:/C:/programacion1/DeliveryApp_BD/ProyectoBD%20-%20copia/DeliveryAppFinal/web/userMain.jsp</file>
+            <file>file:/C:/programacion1/DeliveryApp_BD/ProyectoBD%20-%20copia/DeliveryAppFinal/web/updateUser.jsp</file>
+            <file>file:/C:/programacion1/DeliveryApp_BD/ProyectoBD%20-%20copia/DeliveryAppFinal/src/java/deliveryapp/servlets/ordenServlet.java</file>
+            <file>file:/C:/programacion1/DeliveryApp_BD/ProyectoBD%20-%20copia/DeliveryAppFinal/src/java/deliveryapp/logic/userLogic.java</file>
+            <file>file:/C:/programacion1/DeliveryApp_BD/ProyectoBD%20-%20copia/DeliveryAppFinal/web/root_dash.jsp</file>
         </group>
     </open-files>
 </project-private>

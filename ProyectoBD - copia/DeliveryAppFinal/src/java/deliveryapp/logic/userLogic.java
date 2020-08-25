@@ -6,6 +6,7 @@ import balcorpfw.logic.Logic;
 import deliveryapp.objects.userObj;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,6 +37,7 @@ public class userLogic extends Logic {
                 String email;
                 String pass;
                 String type;
+                int placa;
                 while(result.next())
                 {
                     id = result.getInt("id_usuario");
@@ -45,7 +47,9 @@ public class userLogic extends Logic {
                     email = result.getString("Email");
                     pass = result.getString("Contrasena");
                     type = result.getString("Tipo_usuario");
-                    temp = new userObj(id, name, apellido, telefono, email, pass, type);
+                    placa = result.getInt("placa_vehiculo");
+                    
+                    temp = new userObj(id, name, apellido, telefono, email, pass, type, placa);
                 }
             } 
             catch (SQLException ex) 
@@ -105,6 +109,115 @@ public class userLogic extends Logic {
         int rows = database.executeNonQueryRows(sql);
         return rows;
      }
+     public int deleteUser(int pId)
+    {
+        DatabaseX database = getDatabase();
+        String sql = "DELETE FROM aplicacion_domicilio.usuario "
+                + "WHERE id_usuario = '"+pId+"';";
+        int rows = database.executeNonQueryRows(sql);
+        return rows;
+    } 
     
+    public ArrayList<userObj> getAllUsers()
+    {
+        DatabaseX database = getDatabase();
+        ArrayList<userObj> userArray = new ArrayList<>();
+        String sql = "select * from aplicacion_domicilio.usuario";
+        ResultSet result = database.executeQuery(sql);
+        
+        if(result!=null)
+        {
+            try 
+            {
+                int iId;
+                String strNombre;
+                String strApellido;
+                String strTelefono;
+                String strEmail;
+                String strPass;
+                String strType;
+                int iPlaca;
+                userObj temp;
+                
+                while(result.next())
+                {
+                    iId = result.getInt("id_usuario");
+                    strNombre = result.getString("Nombre");
+                    strApellido = result.getString("Apellido");
+                    strTelefono = result.getString("Telefono");
+                    strEmail = result.getString("Email");
+                    
+                    strPass = result.getString("Contrasena");
+                    strType = result.getString("Tipo_usuario");
+                    iPlaca = result.getInt("placa_vehiculo");
+                    temp = new userObj (iId, strNombre, strApellido, strTelefono, strEmail, strPass, strType, iPlaca);
+                    userArray.add(temp);
+                }
+            } 
+            catch (SQLException ex) 
+            {
+                
+            }
+        }
+        
+        return userArray;
+    }    
     
-}
+    public userObj getUserById(int pId)
+    {
+        DatabaseX database = getDatabase();
+        ArrayList<userObj> userArray = new ArrayList<>();
+        String sql = "select * from aplicacion_domicilio.usuario where id_usuario= '"+pId+"';";
+        ResultSet result = database.executeQuery(sql);
+        
+        userObj temp = null;
+        
+        if(result!=null)
+        {
+            
+            try 
+            {
+                int iId;
+                String strNombre;
+                String strApellido;
+                String strTelefono;
+                String strEmail;
+                String strPass;
+                String strType;
+                int iPlaca;
+                while(result.next())
+                {
+                    iId = result.getInt("id_usuario");
+                    strNombre = result.getString("Nombre");
+                    strApellido = result.getString("Apellido");
+                    strTelefono = result.getString("Telefono");
+                    strEmail = result.getString("Email");
+                    strPass = result.getString("Contrasena");
+                    strType = result.getString("Tipo_usuario");
+                    iPlaca = result.getInt("placa_vehiculo");
+                    temp = new userObj(pId, strNombre, strApellido, strTelefono, strEmail, strPass, strType, iPlaca);
+                }
+            } 
+            catch (SQLException ex) 
+            {
+                
+            }
+        }
+        return temp;
+    }    
+    
+    public int updateUser (int pId, String pNombre, String pApellido, String pTelefono, String pEmail, String pPass, String pType, int pPlaca) 
+    {
+        DatabaseX database = getDatabase();
+        String sql = "UPDATE aplicacion_domicilio.usuario "
+                + "SET Nombre = '"+pNombre+"', Apellido='"+pApellido+"', Telefono='"+pTelefono+"', Email= '"+pEmail+"', Contrasena= '"+pPass+"', Tipo_usuario= '"+pType+"', placa_vehiculo= "+pPlaca+"  "
+                + "WHERE (id_usuario = '"+pId+"');";
+        int rows = database.executeNonQueryRows(sql);
+        return rows;
+    }    
+    
+}    
+    
+
+    
+
