@@ -7,6 +7,7 @@ package deliveryapp.logic;
 
 import balcorpfw.database.DatabaseX;
 import balcorpfw.logic.Logic;
+import deliveryapp.objects.direccionObj;
 import deliveryapp.objects.rootViewObj;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,12 +42,12 @@ public class ordenLogic extends Logic {
     }
    
     
-    public int insertNewOrden_Producto(int pIdProducto, int pId_orden, int pId_usuario){
+    public int insertNewOrden_Producto(int pIdProducto, int pId_orden, int pId_usuario, int pId_direccion){
         DatabaseX database = getDatabase();
         String sql="INSERT INTO aplicacion_domicilio.orden_productos"+
-                    "(codigo_orden, id_producto, id_orden, id_usuario)"+
+                    "(codigo_orden, id_producto, id_orden, id_usuario, id_direccion)"+
                     "VALUES"+
-                    "(0, '"+pIdProducto+"','"+pId_orden+"', '"+pId_usuario+"');";
+                    "(0, '"+pIdProducto+"','"+pId_orden+"', '"+pId_usuario+"', '"+pId_direccion+"');";
         int rows = database.executeNonQueryRows(sql);
         return rows;
         
@@ -179,6 +180,47 @@ public class ordenLogic extends Logic {
         
         int rows = database.executeNonQueryRows(sql);
         return rows;
+    }
+        
+    public ArrayList<direccionObj> getAllDirections(int pId)
+    {
+        DatabaseX database = getDatabase();
+        ArrayList<direccionObj> teacherArray = new ArrayList<>();
+        String sql = "select * from aplicacion_domicilio.direccion WHERE id_usuario='"+pId+"';";
+        ResultSet result = database.executeQuery(sql);
+        
+        if(result!=null)
+        {
+            try 
+            {
+                int iId;
+                String strDep;
+                String strMun;
+                String strCol;
+                int iCasa;
+                int iId_usu;
+                direccionObj temp;
+                
+                while(result.next())
+                {
+                    iId = result.getInt("id_direccion");
+                    strDep = result.getString("Departamento");
+                    strMun = result.getString("Municipio");
+                    strCol = result.getString("Colonia");
+                    iCasa = result.getInt("Numero_casa");
+                    iId_usu = result.getInt("id_usuario");
+                    temp = new direccionObj(iId, strDep, strMun, strCol, iCasa, iId_usu);
+                    teacherArray.add(temp);
+                }
+            } 
+            catch (SQLException ex) 
+            {
+                Logger.getLogger(ordenLogic.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return teacherArray;
+    
         
     }
 }

@@ -1,6 +1,9 @@
 package deliveryapp.servlets;
 
+import deliveryapp.logic.ordenLogic;
 import deliveryapp.logic.productoLogic;
+import deliveryapp.logic.userLogic;
+import deliveryapp.objects.direccionObj;
 import deliveryapp.objects.productoObj;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,6 +29,12 @@ public class productoServlet extends HttpServlet
         int iCantidad, rows, iId;
         Double dPrecio;
         request.getSession().setAttribute("rows", 0);
+        userLogic logic3;
+        ordenLogic logic2;
+        String strEmail;
+        int iId_us;
+        ArrayList<direccionObj> dirObj;
+        
         switch (strFormId) 
         {
          
@@ -51,6 +60,16 @@ public class productoServlet extends HttpServlet
                 //enmedio
                 logic = new productoLogic(strConnString);
                 productoObj ordenObject = logic.getOrdenById(iId);
+                
+                logic2 = new ordenLogic(strConnString);
+                logic3 = new userLogic(strConnString);
+                strEmail= (String)request.getSession().getAttribute("us");
+                System.out.println("El correo es: "+strEmail);
+                               
+                iId_us = logic3.getUserByEmail(strEmail).getId();                
+                dirObj = logic2.getAllDirections(iId_us);
+                System.out.println(dirObj); 
+                request.getSession().setAttribute("dirObj", dirObj);
                 
                 //al final
                 request.getSession().setAttribute("id", iId);

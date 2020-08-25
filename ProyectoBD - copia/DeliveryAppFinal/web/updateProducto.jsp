@@ -39,20 +39,21 @@
         productoObj productoObj = 
                 (productoObj)request.getSession().getAttribute("productoobject");
     %>
-    <header>
-        <h1>Modificar los datos del producto</h1>
-    </header>
+        <body>        
+
+            <header>
+                <h1>Modificar los datos del producto</h1>
+            </header>
     
-    <body>        
         <form action="productoServlet" method="get">
             Nombre: <br>
             <input type="text" id="nombre" name="nombre" value="<%= productoObj.getName() %>"/>
             <br><br>
             Cantidad: <br>
-            <input type="number" id="cantidad" name="cantidad" value="<%= productoObj.getCantidad() %>" />
+            <input type="text" id="cantidad" name="cantidad" value=<%= productoObj.getCantidad() %> />
             <br><br>
             Precio: <br>
-            <input type="number" id="precio" name="precio" value="<%= productoObj.getPrecio() %>" />
+            <input type="text" id="precio" name="precio" value="<%= productoObj.getPrecio() %>" />
             <br><br>
             Existencia: <br>
             <input type="text" id="existencia" name="existencia" value="<%= productoObj.getExistencia() %>"/>

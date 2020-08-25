@@ -90,14 +90,14 @@ public class userLogic extends Logic {
         return iId;
         
     }
-    public int registerNewClientDirection(String pDepartamento, String pMunicipio, String pColonia, String pCasa, int pId) {
+    public int registerNewClientDirection(String pDepartamento, String pMunicipio, String pColonia, int pCasa, int pId) {
         DatabaseX database = getDatabase();
         String query = "insert into aplicacion_domicilio.direccion "
                 + "(id_direccion, Departamento, Municipio, Colonia, Numero_casa, id_usuario) values"
-                + "(0, '"+pDepartamento+"', '"+pMunicipio+"', '"+pColonia+"', '"+pCasa+"', "+pId+")" ;
+                + "(0, '"+pDepartamento+"', '"+pMunicipio+"', '"+pColonia+"', "+pCasa+", "+pId+")" ;
         int rows = database.executeNonQueryRows(query);
         return rows;
-    } 
+    }
     
     public int getId_usuario(String pEmail){
         DatabaseX database = getDatabase();

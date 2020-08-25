@@ -122,10 +122,11 @@ public class userServlet extends HttpServlet {
                 String municipio = request.getParameter("municipio");
                 String colonia = request.getParameter("colonia");
                 String casa = request.getParameter("casa");
+                int iCasa = Integer.parseInt(casa);
 
                 //INGRESAR A LA BD
                 int id = logic5.getId_Usuario();
-                rows = logic5.registerNewClientDirection(departamento, municipio, colonia, casa, id);
+                rows = logic5.registerNewClientDirection(departamento, municipio, colonia, iCasa, id);
                 
                 //REDIRECCIONAR
                 response.sendRedirect("registroResponse.jsp");
@@ -169,6 +170,7 @@ public class userServlet extends HttpServlet {
                 String municipioE = request.getParameter("municipio");
                 String coloniaE = request.getParameter("colonia");
                 String casaE = request.getParameter("casa");
+                int iCasaE = Integer.parseInt(casaE);
 
                 //INGRESAR A LA BD
                 
@@ -178,7 +180,7 @@ public class userServlet extends HttpServlet {
                 
                 iId_us = logic8.getUserByEmail(strEmail).getId();
                 
-                rows = logic8.registerNewClientDirection(departamentoE, municipioE, coloniaE, casaE, iId_us);
+                rows = logic8.registerNewClientDirection(departamentoE, municipioE, coloniaE, iCasaE, iId_us);
                 
                 //REDIRECCIONAR
                 response.sendRedirect("cliente_dash.jsp");

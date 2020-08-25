@@ -15,7 +15,8 @@
     <%
         userObj currentUser 
                 = (userObj) request.getSession().getAttribute("current_user");
-        
+        String strEmail = currentUser.getEmail();
+        request.getSession().setAttribute("us", strEmail);
         if(currentUser!=null)
         {
     %>
@@ -32,12 +33,12 @@
         <br><br>
         <a href="direccionExtra.jsp">Añadir dirección</a>
 
-    </body>
+    
     <%
         }
         else{
     %>
-        <body>
+        
             <h1>Client Index</h1>
             <br>
 
