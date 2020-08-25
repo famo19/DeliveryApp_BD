@@ -96,7 +96,7 @@
           <br>
           <h1>¿Sugerencias?</h1>
           
-          <a href="Sugerencias.html" style="text-decoration: none">Llena este formulario</a>
+          <a href="sugerencias.jsp" style="text-decoration: none">Llena este formulario</a>
           <br>
           <br>
           <br>
