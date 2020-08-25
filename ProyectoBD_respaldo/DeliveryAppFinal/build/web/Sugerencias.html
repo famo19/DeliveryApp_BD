@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+    	<meta charset="UTF-8">
+        <title>Sugerencias</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+
+    		header 
+    		{
+  				background-color: #E55E46;
+  				height: 190px;
+				text-align: center;
+  				background-image:url(https://automation.hal.company/hubfs/HAL%20-%20Preguntas%20para%20vendedores.jpg);
+  				text-shadow: rgb(44, 44, 44) 1.4px 1.4px 1.4px;
+				width: 100%;
+				box-shadow:0px 0.5px 0px #2C2C2C;
+				left: 0;
+				top: 0;
+				opacity:0.91;
+				position: fixed;
+				font-size: 25px;
+  				color: white;
+				border-radius: 0 0 85% 85% / 35%;
+			}
+
+			body 
+			{
+				padding-top: 195px;
+  				background-color: #8EE5E3;
+  				font-family: Helvetica;
+
+  				text-align: center;
+  				font-size: 20px;
+  				color: #5D5D5D;
+			}
+
+			textarea
+			{
+				border:1px solid #3C3C3C;
+				border-radius:3px;
+				background-color: white;			
+				margin:8px 0;
+				font-family: Helvetica;
+				font-style: italic;
+				opacity:0.6;
+				resize:none;
+			}
+
+			form input[type="submit"]:hover{
+				cursor:pointer;
+			}
+
+			form input[type="submit"]{
+				padding:8px 16px;
+				border:0.2px solid #3C3C3C;
+				border-radius:5px;
+				color: white;
+				background-color:#117C99;
+			} 
+
+		</style>
+    </head>
+    <body >
+    <header>
+    	<br>
+    	<h1>Sugerencias para el servicio</h1>
+    </header>
+        
+    
+
+    	
+    	<form action="formulario.php" method="get">
+        <p>Si usted tiene alguna recomendación o queja acerca del servicio puede realizarla aquí:</p>
+        <textarea name="texto" rows="15" cols="70" placeholder="Escriba algo"></textarea>
+  		<p><input type="submit" value="Enviar"></p>
+
+  		</form>
+    </body>
+</html>

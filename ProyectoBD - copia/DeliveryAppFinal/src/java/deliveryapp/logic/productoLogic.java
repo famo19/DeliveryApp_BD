@@ -174,6 +174,110 @@ public class productoLogic extends Logic
         return (rows/2);
     }
     
+        public int insertNewProducto(int pCantidad, Double pPrecio, String pExistencia, String pName)
+    {
+        DatabaseX database = getDatabase();
+        String sql = "insert into aplicacion_domicilio.productos"
+                + "(id_producto, cantidad, precio, existencia, nombre) "
+                + "values(0, '"+pCantidad+"', '"+pPrecio+"', '"+pExistencia+"', '"+pName+"')";
+        int rows = database.executeNonQueryRows(sql);
+        return rows;
+    }  
+    
+    public int deleteProducto2(int pId)
+    {
+        DatabaseX database = getDatabase();
+        String sql = "DELETE FROM aplicacion_domicilio.productos "
+                + "WHERE id_producto= '"+pId+"';";
+        int rows = database.executeNonQueryRows(sql);
+        return rows;
+    } 
+    
+    public ArrayList<productoObj> getAllProductos()
+    {
+        DatabaseX database = getDatabase();
+        ArrayList<productoObj> productoArray = new ArrayList<>();
+        String sql = "select * from aplicacion_domicilio.productos";
+        ResultSet result = database.executeQuery(sql);
+        
+        if(result!=null)
+        {
+            try 
+            {
+                int iId;
+                int iCantidad; 
+                Double dPrecio;
+                String strExistencia; 
+                String strName;
+                productoObj temp;
+                
+                while(result.next())
+                {
+                    iId = result.getInt("id_producto");
+                    iCantidad = result.getInt("cantidad");                    
+                    dPrecio = result.getDouble("precio");
+                    strExistencia = result.getString("existencia");
+                    strName = result.getString("nombre");
+                    
+                    temp = new productoObj(iId, iCantidad, dPrecio, strExistencia,strName);
+                    productoArray.add(temp);
+                }
+            } 
+            catch (SQLException ex) 
+            {
+                
+            }
+        }
+        
+        return productoArray;
+    }    
+    
+    public productoObj getProductoById(int pId)
+    {
+        DatabaseX database = getDatabase();
+        ArrayList<productoObj> productoArray = new ArrayList<>();
+        String sql = "select * from aplicacion_domicilio.productos where id_producto= '"+pId+"';";
+        ResultSet result = database.executeQuery(sql);
+        
+       productoObj temp = null;
+        
+        if(result!=null)
+        {
+            
+            try 
+            {
+                int iId;
+                String strName;
+                int iCantidad;               
+                Double dPrecio;
+                String strExistencia;
+                while(result.next())
+                {
+                    iId = result.getInt("id_producto");
+                    iCantidad = result.getInt("cantidad");                   
+                    dPrecio = result.getDouble("precio");
+                    strExistencia = result.getString("existencia");
+                    strName = result.getString("nombre");
+                    temp = new productoObj(iId, iCantidad, dPrecio, strExistencia, strName);
+                }
+            } 
+            catch (SQLException ex) 
+            {
+                
+            }
+        }
+        return temp;
+    }    
+    
+    public int updateProducto (int pCantidad, Double pPrecio, String pExistencia, String pName, int pId) 
+    {
+        DatabaseX database = getDatabase();
+        String sql = "UPDATE aplicacion_domicilio.productos "
+                + "SET cantidad='"+pCantidad+"', precio= '"+pPrecio+"', existencia= '"+pExistencia+"', nombre= '"+pName+"'  "
+                + "WHERE (id_producto = '"+pId+"');";
+        int rows = database.executeNonQueryRows(sql);
+        return rows;
+    }    
 }
 
 

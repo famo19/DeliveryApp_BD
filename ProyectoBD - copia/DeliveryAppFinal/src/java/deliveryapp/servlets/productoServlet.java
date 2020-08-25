@@ -21,13 +21,11 @@ public class productoServlet extends HttpServlet
                              + "user=root&password=12345&" + "autoReconnect=true&useSSL=false&serverTimezone=UTC";
         String strFormId = request.getParameter("formid");
         
-        int rows, iId;
-        String strName;
-        String strProfession;
-        String strId;
+         productoLogic logic; 
+        String strName, strCantidad, strPrecio, strExistencia, strId;
+        int iCantidad, rows, iId;
+        Double dPrecio;
         request.getSession().setAttribute("rows", 0);
-        productoLogic logic;
-        
         switch (strFormId) 
         {
          
@@ -118,9 +116,93 @@ public class productoServlet extends HttpServlet
                 response.sendRedirect("ordenServlet?formid=2");
                 
                 break;
+           case "6":
+                System.out.println("code for insert new...");
                 
+                //al inicio
+                strName = request.getParameter("nombre"); 
+                iCantidad = Integer.parseInt(request.getParameter("cantidad"));
+                dPrecio = Double.parseDouble(request.getParameter("precio"));
+                strExistencia = request.getParameter("existencia");
+                System.out.print(strName);
+                System.out.print(iCantidad);
+                System.out.print(dPrecio);
+                System.out.print(strExistencia);
+                
+                //enmedio
+                logic = new productoLogic(strConnString);
+                rows = logic.insertNewProducto( iCantidad, dPrecio, strExistencia, strName );
+                
+                //al final
+                request.getSession().setAttribute("rows", rows);
+                response.sendRedirect("productoServlet?formid=8");                
+                
+                break;
+            case "7":
+                System.out.println("code for delete...");
+                
+                //al inicio
+                strId = request.getParameter("id");
+                iId = Integer.parseInt(strId);
+                
+                //enmedio
+                logic = new productoLogic(strConnString);
+                rows = logic.deleteProducto2(iId);
+                
+                
+                //al final
+                request.getSession().setAttribute("rows", rows);
+                response.sendRedirect("productoServlet?formid=8");
+                
+                break;
+            case "8":
+                System.out.println("code for select...");
+                //enmedio
+                logic = new productoLogic(strConnString);
+                ArrayList<productoObj> productoArray2 = logic.getAllProductos();
+                
+                //al final
+                request.getSession().setAttribute("productoarray2", productoArray2);
+                response.sendRedirect("productoMain.jsp");
+                
+                break;
+            case "9":
+                System.out.println("code for update part 1...");
+                
+                //al inicio
+                strId = request.getParameter("id");
+                iId = Integer.parseInt(strId);
+                System.out.println("ESTE ES EL ID"+iId);
+                
+                //enmedio
+                logic = new productoLogic(strConnString);
+                productoObj productoObject = logic.getProductoById(iId);
+                
+                //al final
+                request.getSession().setAttribute("productoobject", productoObject);
+                response.sendRedirect("updateProducto.jsp");
+                
+                break;
+            case "10":
+                System.out.println("code for update part 2...");
+                
+                strId = request.getParameter("id");
+                iId = Integer.parseInt(strId);
+                iCantidad = Integer.parseInt(request.getParameter("cantidad"));
+                dPrecio = Double.parseDouble(request.getParameter("precio"));
+                strExistencia = request.getParameter("existencia");
+                strName = request.getParameter("nombre");
+                
+                logic = new productoLogic(strConnString);
+                rows = logic.updateProducto(iCantidad, dPrecio, strExistencia,strName, iId);
+                
+                request.getSession().setAttribute("rows", rows);
+                response.sendRedirect("productoServlet?formid=8");                
+                
+                break;                
             default:
                 break;
+                
         }
     }
 

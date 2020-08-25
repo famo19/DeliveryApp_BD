@@ -83,37 +83,7 @@ public class ordenServlet extends HttpServlet {
                 
                 break;
                 
-            case "3":
-                System.out.println("code for insert new...");
-                //al inicio
-                int cantidad = ((request.getParameter("compra")));
-                int ID = Integer.parseInt(request.getParameter("id"));
-                System.out.print(ID);
-                
-                //enmedio
-                logic = new productoLogic(strConnString);
-                double precio = logic.getPrecioById(ID).getPrecio();
-                logic2= new ordenLogic(strConnString);
-                String date = logic2.fecha();
-                Double total = precio*cantidad;
-                rows = logic2.insertNewOrden(cantidad, total, date, ID);
-                //orden_productos
-                logic3 = new userLogic(strConnString);
-                strEmail= (String)request.getSession().getAttribute("us");
-                System.out.println("El correo es: "+strEmail);
-               
-                
-                iId_us = logic3.getUserByEmail(strEmail).getId();
-                iId_ord = logic2.getId_Orden();
-                rows2 = logic2.insertNewOrden_Producto(ID, iId_ord, iId_us);
-                
-                //al final
-                
-                request.getSession().setAttribute("rows", rows);
-                response.sendRedirect("finalOrderMain.jsp");        
-                
-                break;
-                
+
             default:
                 
                 break;
