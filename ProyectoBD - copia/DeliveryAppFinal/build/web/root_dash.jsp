@@ -31,7 +31,10 @@
          <a href="Registro-repartidores.html">Agregar Repartidor</a>
         <br>
         <br>
-        <a href="Ingreso_productos.html">Agregar productos</a>
+        <a href="Ingreso_productos.jsp">Agregar productos</a>
+        <br>
+        <br>
+        <a href="productoServlet?formid=8">Ver lista completa de productos</a>
         <br>
         <br>
         <!--FALTA REDIRECCIONAMIENTO-->
