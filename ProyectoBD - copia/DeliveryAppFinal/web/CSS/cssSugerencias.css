@@ -1,0 +1,54 @@
+.sug-page {
+  width: 530px;
+  padding: 10% 0 0;
+  margin: auto;
+  text-align: center;
+}
+
+.form {
+  background: #FFFFFF;
+  margin-top: -45px; 
+  padding: 35px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+textarea{font-family: "Roboto", sans-serif;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form input {
+  
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+
+form input[type="submit"] {
+  text-transform: uppercase;
+  background: #117C99;
+  width: 50%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.form input[type="submit"]:hover,.form input[type="submit"]:active,.form input[type="submit"]:focus {
+  background: #3399CC;
+}
+
+body {
+  background-image:url(https://automation.hal.company/hubfs/HAL%20-%20Preguntas%20para%20vendedores.jpg);
+  font-family: "Roboto", sans-serif;     
+}
