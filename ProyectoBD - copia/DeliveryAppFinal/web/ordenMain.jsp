@@ -1,6 +1,9 @@
 <%@page import="deliveryapp.objects.userObj"%>
 <%@page import="deliveryapp.objects.productoObj"%>
 <%@page import="deliveryapp.objects.ordenObj"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="deliveryapp.objects.direccionObj"%>
+<%@page import="java.util.ArrayList"%>
 <%@page session="true" %>
 
 <%-- 
@@ -19,8 +22,16 @@
     </head>
     
     <%
+       
+        ArrayList<direccionObj> dirArray = 
+                (ArrayList<direccionObj>) request.getSession()
+                        .getAttribute("dirObj");
+    %>
+    <%
+    
         int rows = (int)request.getSession().getAttribute("rows");
          productoObj productObj = (productoObj)request.getSession().getAttribute("ordenobject");
+    
     %>
     
     <body>
@@ -81,31 +92,30 @@
           <br>
           <br>
           
-          <form action="ordenServlet" method="POST">
-            Fábrica:<br>
-            <select name="idFabrica" id="idFabrica">
-                
-                <%
-                    Iterator<direccionObj> arrIterator = null;
-                    if(arr!= null)
-                    {
-                        arrIterator = arr.iterator();
-                        direccionObj tempF = null;
-
-                        while(arrIterator.hasNext())
-                        {
-                            tempF = arrIterator.next();
-
-                %>
-                    <option value="<%= tempF.getId() %>"> <%= tempF.getNombre() %></option>
-                <%
-                        }
-                    }
-
-                %>
-            </select>
-            
-            <option> </option>
+          <form action="ordenServlet" method="get">
+              
+            <%
+                Iterator<direccionObj> iteDir = dirArray.iterator();
+            %>
+            <label for="direccion">Direccion:</label>
+            <br>
+            <select id="direccion" name="direccion" required>
+              <option value="">--</option>
+              <%
+                  if(iteDir!=null)
+                  {
+                      direccionObj temp;
+                      while(iteDir.hasNext())
+                      {
+                          temp = iteDir.next();
+              %>
+                    <option value="<%= temp.getId() %>"><%= temp.getId()%></option>
+              <%
+                      }
+                  }
+              %>
+            </select> 
+            <br><br>
               <label>Cantidad</label><br>
             <input type="number" id="compra" name="compra" required>
             <input type="submit" value="Comprar"/> 

@@ -8,6 +8,7 @@ package deliveryapp.servlets;
 import deliveryapp.logic.ordenLogic;
 import deliveryapp.logic.productoLogic;
 import deliveryapp.logic.userLogic;
+import deliveryapp.objects.direccionObj;
 import deliveryapp.objects.rootViewObj;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class ordenServlet extends HttpServlet {
         ordenLogic logic2;
         userLogic logic3;
         String strId, strEmail;
+        ArrayList<direccionObj> dirObj;
         
         switch (strFormId) 
         {
@@ -44,6 +46,7 @@ public class ordenServlet extends HttpServlet {
                 int cantidad = Integer.parseInt((request.getParameter("compra")));
                 int ID = Integer.parseInt(request.getParameter("id"));
                 System.out.print(ID);
+                int id_dir = Integer.parseInt((request.getParameter("direccion")));
                 
                 //enmedio
                 logic = new productoLogic(strConnString);
@@ -60,7 +63,15 @@ public class ordenServlet extends HttpServlet {
                 
                 iId_us = logic3.getUserByEmail(strEmail).getId();
                 iId_ord = logic2.getId_Orden();
-                rows2 = logic2.insertNewOrden_Producto(ID, iId_ord, iId_us);
+                rows2 = logic2.insertNewOrden_Producto(ID, iId_ord, iId_us, id_dir);
+                
+                System.out.println("get all directions  ...");   
+                
+            
+                dirObj = logic2.getAllDirections(iId_us);
+                System.out.println(dirObj); 
+                request.getSession().setAttribute("dirObj", dirObj);
+                
                 
                 //al final
                 
@@ -83,36 +94,21 @@ public class ordenServlet extends HttpServlet {
                 
                 break;
                 
-            case "3":
-                System.out.println("code for insert new...");
-                //al inicio
-                int cantidad = ((request.getParameter("compra")));
-                int ID = Integer.parseInt(request.getParameter("id"));
-                System.out.print(ID);
+            case "50":
+                System.out.println("get all directions  ...");   
                 
-                //enmedio
-                logic = new productoLogic(strConnString);
-                double precio = logic.getPrecioById(ID).getPrecio();
-                logic2= new ordenLogic(strConnString);
-                String date = logic2.fecha();
-                Double total = precio*cantidad;
-                rows = logic2.insertNewOrden(cantidad, total, date, ID);
-                //orden_productos
+                logic2 = new ordenLogic(strConnString);
                 logic3 = new userLogic(strConnString);
                 strEmail= (String)request.getSession().getAttribute("us");
                 System.out.println("El correo es: "+strEmail);
-               
-                
-                iId_us = logic3.getUserByEmail(strEmail).getId();
-                iId_ord = logic2.getId_Orden();
-                rows2 = logic2.insertNewOrden_Producto(ID, iId_ord, iId_us);
-                
-                //al final
-                
-                request.getSession().setAttribute("rows", rows);
-                response.sendRedirect("finalOrderMain.jsp");        
-                
-                break;
+                               
+                iId_us = logic3.getUserByEmail(strEmail).getId();                
+                dirObj = logic2.getAllDirections(iId_us);
+                System.out.println(dirObj); 
+                request.getSession().setAttribute("dirObj", dirObj);
+                response.sendRedirect("direccionSelect.jsp");
+            break;
+            
                 
             default:
                 

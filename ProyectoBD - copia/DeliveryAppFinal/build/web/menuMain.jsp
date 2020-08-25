@@ -29,7 +29,7 @@
                 = (userObj) request.getSession().getAttribute("current_user");
         String user = currentUser.getEmail();
         
-        
+        request.getSession().setAttribute("us", user);
         if(currentUser!=null)
         {
     %>
@@ -44,12 +44,12 @@
         }
         else{
     %>
-        <body>
+        
             <h1>Client Index</h1>
             <br>
 
             <a href="index.jsp">go to login</a>
-        </body>
+        
     <%
         }
     %>
