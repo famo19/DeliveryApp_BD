@@ -28,7 +28,7 @@
         <br>
         <a href="userServlet?formid=2">logout</a>
         <br><br>
-         <a href="Registro-repartidores.html">Agregar Repartidor</a>
+         <a href="userServlet?formid=10">Control de usuarios</a>
         <br>
         <br>
         <a href="Ingreso_productos.jsp">Agregar productos</a>
