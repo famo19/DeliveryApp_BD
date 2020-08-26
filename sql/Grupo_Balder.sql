@@ -32,7 +32,7 @@ CREATE TABLE `direccion` (
   PRIMARY KEY (`id_direccion`),
   KEY `fk_id_usuario_idx` (`id_usuario`),
   CONSTRAINT `fk_id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,35 +41,8 @@ CREATE TABLE `direccion` (
 
 LOCK TABLES `direccion` WRITE;
 /*!40000 ALTER TABLE `direccion` DISABLE KEYS */;
-INSERT INTO `direccion` VALUES (1,'La Libertad','Santa Tecla','San José',89,1),(2,'San Salvador','Soyapango','San José',45,3),(3,'San Salvador','Soyapango','La campanera',7,1),(5,'La libertad','Zaragoza','San José Villanueva',3,1);
+INSERT INTO `direccion` VALUES (1,'La Libertad','Santa Tecla','San José',89,1),(2,'San Salvador','Soyapango','San José',45,3),(3,'San Salvador','Soyapango','La campanera',7,1),(7,'Santa Ana','Metapán','Altamira',789,11),(8,'La Libertad','Santa Tecla','Residencial Los Sueños',666,11);
 /*!40000 ALTER TABLE `direccion` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `or_pro_re`
---
-
-DROP TABLE IF EXISTS `or_pro_re`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `or_pro_re` (
-  `id_or_pro_re` int NOT NULL,
-  `id_codigo_orden` int NOT NULL,
-  `id_repartidor` int NOT NULL,
-  `id_producto` int NOT NULL,
-  `id_usuario` int NOT NULL,
-  `id_direccion` int NOT NULL,
-  PRIMARY KEY (`id_or_pro_re`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `or_pro_re`
---
-
-LOCK TABLES `or_pro_re` WRITE;
-/*!40000 ALTER TABLE `or_pro_re` DISABLE KEYS */;
-/*!40000 ALTER TABLE `or_pro_re` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -89,7 +62,7 @@ CREATE TABLE `orden` (
   PRIMARY KEY (`id_orden`),
   KEY `fk_id_producto_idx` (`id_producto`),
   CONSTRAINT `fk_id_producto` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +96,7 @@ CREATE TABLE `orden_productos` (
   CONSTRAINT `fk_Orden_productos_Orden1` FOREIGN KEY (`id_orden`) REFERENCES `orden` (`id_orden`),
   CONSTRAINT `fk_Orden_productos_Productos1` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`),
   CONSTRAINT `fk_orden_productos_usuario1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +122,7 @@ CREATE TABLE `productos` (
   `existencia` varchar(45) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   PRIMARY KEY (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +131,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (5,120,2.45,'Sí','Tacos al Pastor');
+INSERT INTO `productos` VALUES (12,150,2.50,'Sí','Sopa de Caracol'),(13,150,3.00,'Sí','Sopa de Patas');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -257,7 +230,7 @@ CREATE TABLE `usuario` (
   `Tipo_usuario` varchar(45) NOT NULL,
   `placa_vehiculo` int DEFAULT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -266,7 +239,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'Francisco','Murillo','72814994','frank@gmail.com','12345','cliente',1),(2,'Oscar','Franco','79631587','oscar@hotmail.com','456','root',1),(3,'Alexander','Petrov','79651285','petrov@yahoo.es','123','cliente',1),(4,'Azaela','Greenwich','79486312','aza@green.com','159','root',1),(9,'Florencia','Alvarez','77765675','flor@frozen.com','123','root',1);
+INSERT INTO `usuario` VALUES (1,'Francisco','Murillo','72814994','frank@gmail.com','12345','cliente',1),(2,'Oscar','Franco','79631587','oscar@hotmail.com','456','root',1),(3,'Alexander','Petrov','79651285','petrov@yahoo.es','123','cliente',1),(4,'Azaela','Greenwich','79486312','aza@green.com','159','root',1),(10,'Pedro','Hernández','78964217','pedro@yahoo.es','7534','repartidor',789456),(11,'Jason','Maravilla','78964585','jason@gmail.com','123','cliente',1),(12,'Antonio','Barahona','68957412','tonnio@hotmail.com','000','repartidor',789456),(13,'Verónica','Fermán','96857412','vero@gmail.com','VERO','root',1);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -283,7 +256,7 @@ UNLOCK TABLES;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `repartidor_view` AS select `d`.`id_usuario` AS `id_usuario`,`d`.`Nombre` AS `Nombre`,`d`.`Apellido` AS `Apellido`,`a`.`id_orden` AS `id_orden`,`a`.`cantidad` AS `cantidad`,`a`.`total` AS `total`,`a`.`estado` AS `estado`,`c`.`id_producto` AS `id_producto`,`c`.`nombre` AS `Producto`,`e`.`id_direccion` AS `id_direccion`,`e`.`Departamento` AS `Departamento`,`e`.`Municipio` AS `Municipio`,`e`.`Colonia` AS `Colonia`,`e`.`Numero_casa` AS `Numero_casa` from ((((`orden` `a` join `orden_productos` `b` on((`a`.`id_orden` = `b`.`id_orden`))) join `productos` `c` on((`b`.`id_producto` = `c`.`id_producto`))) join `usuario` `d` on((`b`.`id_usuario` = `d`.`id_usuario`))) join `direccion` `e` on((`d`.`id_usuario` = `e`.`id_usuario`))) */;
+/*!50001 VIEW `repartidor_view` AS select `d`.`id_usuario` AS `id_usuario`,`d`.`Nombre` AS `Nombre`,`d`.`Apellido` AS `Apellido`,`a`.`id_orden` AS `id_orden`,`a`.`cantidad` AS `cantidad`,`a`.`total` AS `total`,`a`.`estado` AS `estado`,`c`.`id_producto` AS `id_producto`,`c`.`nombre` AS `Producto`,`e`.`id_direccion` AS `id_direccion`,`e`.`Departamento` AS `Departamento`,`e`.`Municipio` AS `Municipio`,`e`.`Colonia` AS `Colonia`,`e`.`Numero_casa` AS `Numero_casa` from ((((`orden` `a` join `orden_productos` `b` on((`a`.`id_orden` = `b`.`id_orden`))) join `productos` `c` on((`b`.`id_producto` = `c`.`id_producto`))) join `usuario` `d` on((`b`.`id_usuario` = `d`.`id_usuario`))) join `direccion` `e` on((`b`.`id_direccion` = `e`.`id_direccion`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -315,4 +288,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-25 18:50:13
+-- Dump completed on 2020-08-26 16:57:24
