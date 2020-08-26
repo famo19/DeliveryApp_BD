@@ -187,9 +187,18 @@ public class productoLogic extends Logic
     public int deleteProducto2(int pId)
     {
         DatabaseX database = getDatabase();
+        String sql3 = "DELETE FROM aplicacion_domicilio.orden_productos"
+                +   "WHERE id_producto= '"+pId+"';";
+        int rows = database.executeNonQueryRows(sql3);       
+        String sql2 = "DELETE FROM aplicacion_domicilio.orden"
+                + "WHERE id_producto= '"+pId+"';";
+        rows += database.executeNonQueryRows(sql2);
         String sql = "DELETE FROM aplicacion_domicilio.productos "
                 + "WHERE id_producto= '"+pId+"';";
-        int rows = database.executeNonQueryRows(sql);
+        rows += database.executeNonQueryRows(sql);
+
+        
+       
         return rows;
     } 
     
