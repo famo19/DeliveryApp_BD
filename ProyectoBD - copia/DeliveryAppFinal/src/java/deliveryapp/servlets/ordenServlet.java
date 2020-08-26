@@ -34,6 +34,7 @@ public class ordenServlet extends HttpServlet {
         productoLogic logic;
         ordenLogic logic2;
         userLogic logic3;
+        
         String strId, strEmail;
         
         switch (strFormId) 
@@ -60,18 +61,17 @@ public class ordenServlet extends HttpServlet {
                 
                 iId_us = logic3.getUserByEmail(strEmail).getId();
                 iId_ord = logic2.getId_Orden();
-                rows2 = logic2.insertNewOrden_Producto(ID, iId_ord, iId_us);
+                rows += logic2.insertNewOrden_Producto(ID, iId_ord, iId_us);
                 
                 //al final
                 
-                request.getSession().setAttribute("rows", rows);
+                request.getSession().setAttribute("rows", (rows/2));
                 response.sendRedirect("finalOrderMain.jsp");
                 
                 break;
                 
             case "2":
                 System.out.println("Selecting Root View  ...");
-                
                 
                 //enmedio
                 logic2 = new ordenLogic(strConnString);
@@ -84,34 +84,31 @@ public class ordenServlet extends HttpServlet {
                 break;
                 
             case "3":
-                System.out.println("code for insert new...");
+                System.out.println("Updating orden...");
                 //al inicio
-                int cantidad = ((request.getParameter("compra")));
-                int ID = Integer.parseInt(request.getParameter("id"));
-                System.out.print(ID);
+                int id_orden = Integer.parseInt((request.getParameter("id_orden")));
+                int id_producto = Integer.parseInt(request.getParameter("id_producto"));
+                int id_us= Integer.parseInt(request.getParameter("id_us"));
+                int id_dir= Integer.parseInt(request.getParameter("id_dir")); ;
+                strEmail = (String)request.getSession().getAttribute("us");;
+                System.out.print(id_orden);
+                System.out.print(id_producto);
+                System.out.print(id_us);
+                System.out.print(id_dir);
                 
-                //enmedio
-                logic = new productoLogic(strConnString);
-                double precio = logic.getPrecioById(ID).getPrecio();
+                //enmedio, PT= Pedido Tomado
                 logic2= new ordenLogic(strConnString);
-                String date = logic2.fecha();
-                Double total = precio*cantidad;
-                rows = logic2.insertNewOrden(cantidad, total, date, ID);
-                //orden_productos
-                logic3 = new userLogic(strConnString);
-                strEmail= (String)request.getSession().getAttribute("us");
-                System.out.println("El correo es: "+strEmail);
-               
+                rows=logic2.updateOrden(id_orden);
+                logic3= new userLogic(strConnString);
+                int id_re= logic3.getId_usuario(strEmail);
+                System.out.print(id_re);
                 
-                iId_us = logic3.getUserByEmail(strEmail).getId();
-                iId_ord = logic2.getId_Orden();
-                rows2 = logic2.insertNewOrden_Producto(ID, iId_ord, iId_us);
+                rows+=logic2.insertOrProRe(id_orden, id_re, id_producto, id_us, id_dir);
                 
-                //al final
                 
-                request.getSession().setAttribute("rows", rows);
-                response.sendRedirect("finalOrderMain.jsp");        
-                
+                //final
+                request.getSession().setAttribute("rows", (rows/2));
+                response.sendRedirect("");
                 break;
                 
             default:

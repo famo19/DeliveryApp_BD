@@ -4,6 +4,7 @@
     Author     : franc
 --%>
 
+<%@page import="deliveryapp.objects.userObj"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="deliveryapp.objects.repartidorViewObj"%>
 <%@page import="java.util.ArrayList"%>
@@ -22,6 +23,38 @@
         
     %>
     <body>
+        <%
+        userObj currentUser 
+                = (userObj) request.getSession().getAttribute("current_user");
+       
+        String user = currentUser.getEmail();
+        request.getSession().setAttribute("us", user);
+       
+        
+        int iId= (int)request.getSession().getAttribute("id");
+        if(currentUser!=null)
+        {
+    %>
+    
+        user:<%= currentUser.getNombre()%> <%= currentUser.getApellido()%>
+        <br>
+        type:<%= currentUser.getType().equals("cliente")?"Cliente":"Root" %>
+        <br>
+        <a href="userServlet?formid=2">Logout</a>
+       
+        <%
+        }
+        else{
+    %>
+        <body>
+            <h1>Client Index</h1>
+            <br>
+
+            <a href="index.jsp">go to login</a>
+        </body>
+    <%
+        }
+    %>
         <h1>Lista de ordenes sin entregar</h1>
         <table style="width:40%" border="1">
           <tr>
@@ -58,7 +91,7 @@
                       <td><%= temp.getMunicipio() %></td>
                       <td><%= temp.getColonia() %></td>
                       <td><%= temp.getNum_casa() %></td>
-                      <td><a href="repartidorServlet?formid=4&id_orden=<%= temp.getId_orden()%>&id_producto=<%=temp.getId_producto()%>&id_us=">Tomar pedido</a></td>
+                      <td><a href="repartidorServlet?formid=4&id_orden=<%= temp.getId_orden()%>&id_producto=<%=temp.getId_producto()%>&id_us=<%=temp.getId_usuario()%>&id_dir=<%= temp.getId_direccion() %>">Tomar pedido</a></td>
                       
                     </tr>
           <%

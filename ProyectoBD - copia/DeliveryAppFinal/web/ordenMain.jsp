@@ -82,30 +82,7 @@
           <br>
           
           <form action="ordenServlet" method="POST">
-            Fábrica:<br>
-            <select name="idFabrica" id="idFabrica">
-                
-                <%
-                    Iterator<direccionObj> arrIterator = null;
-                    if(arr!= null)
-                    {
-                        arrIterator = arr.iterator();
-                        direccionObj tempF = null;
-
-                        while(arrIterator.hasNext())
-                        {
-                            tempF = arrIterator.next();
-
-                %>
-                    <option value="<%= tempF.getId() %>"> <%= tempF.getNombre() %></option>
-                <%
-                        }
-                    }
-
-                %>
-            </select>
             
-            <option> </option>
               <label>Cantidad</label><br>
             <input type="number" id="compra" name="compra" required>
             <input type="submit" value="Comprar"/> 

@@ -16,10 +16,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author franc
- */
+
 public class ordenLogic extends Logic {
 
     public ordenLogic(String pConnectionString) {
@@ -40,13 +37,12 @@ public class ordenLogic extends Logic {
         return rows;
     }
    
-    
     public int insertNewOrden_Producto(int pIdProducto, int pId_orden, int pId_usuario){
         DatabaseX database = getDatabase();
         String sql="INSERT INTO aplicacion_domicilio.orden_productos"+
-                    "(codigo_orden, id_producto, id_orden, id_usuario)"+
+                    "(codigo_orden, id_producto, id_orden, id_usuario, id_direccion)"+
                     "VALUES"+
-                    "(0, '"+pIdProducto+"','"+pId_orden+"', '"+pId_usuario+"');";
+                    "(0, '"+pIdProducto+"','"+pId_orden+"', '"+pId_usuario+"', 1);";
         int rows = database.executeNonQueryRows(sql);
         return rows;
         
@@ -77,7 +73,7 @@ public class ordenLogic extends Logic {
         
     }
     
-     public int getId_usuario(String pEmail){
+    public int getId_usuario(String pEmail){
         DatabaseX database = getDatabase();
         String sql="SELECT id_usuario FROM aplicacion_domicilio.usuario WHERE Email='"+pEmail+"';"; 
         int rows = database.executeNonQueryRows(sql);
@@ -160,11 +156,11 @@ public class ordenLogic extends Logic {
     }
     
     //Id_orden
-    public int updateOrden(String pEstado, int pId){
+    public int updateOrden( int pId){
         DatabaseX database = getDatabase();
         String sql="UPDATE aplicacion_domicilio.orden" +
                 "SET" +
-                "estado = '"+pEstado+"'," +
+                "estado = 'PT'," +
                 "WHERE id_orden = '"+pId+"';";
         int rows = database.executeNonQueryRows(sql);
         return rows;
