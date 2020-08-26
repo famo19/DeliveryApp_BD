@@ -53,7 +53,7 @@
             <input type="number" id="cantidad" name="cantidad" />
             <br><br>
             Precio: <br>
-            <input type="number" id="precio" name="precio" />
+            <input type="decimal" id="precio" name="precio" />
             <br><br>
             Existencia: <br>
             <input type="text" id="existencia" name="existencia" />
