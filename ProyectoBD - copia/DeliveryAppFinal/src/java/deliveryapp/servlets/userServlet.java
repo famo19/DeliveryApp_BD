@@ -4,6 +4,7 @@ package deliveryapp.servlets;
 import deliveryapp.logic.userLogic;
 import deliveryapp.objects.userObj;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +23,9 @@ public class userServlet extends HttpServlet {
                              + "user=root&password=12345&" + "autoReconnect=true&useSSL=false&serverTimezone=UTC";
         String strFormId = request.getParameter("formid");
         String email, password, strEmail;
+        String strNombre,strApellido, strTelefono, strPass,strType,strPlaca,strId;
+        int iPlaca, rows, iId;
+        userLogic logic9;
         userLogic logic;
         String message = "";
         userLogic logic4 = new userLogic(strConnString);
@@ -29,7 +33,7 @@ public class userServlet extends HttpServlet {
         userLogic logic6 = new userLogic(strConnString);
         userLogic logic7 = new userLogic(strConnString);
         userLogic logic8 = new userLogic(strConnString);
-        int rows, iId_us;
+        int iId_us;
         
         switch (strFormId) 
         {
@@ -185,6 +189,82 @@ public class userServlet extends HttpServlet {
                 //REDIRECCIONAR
                 response.sendRedirect("cliente_dash.jsp");
             break;
+            case "9":
+                System.out.println("code for delete...");
+                
+                //al inicio
+                strId = request.getParameter("id");
+                iId = Integer.parseInt(strId);
+                
+                System.out.println(iId);
+                
+                //enmedio
+                logic9 = new userLogic(strConnString);
+                rows = logic9.deleteUser(iId);
+                
+                
+                //al final
+                request.getSession().setAttribute("rows", rows);
+                response.sendRedirect("userServlet?formid=10");
+                
+                break;
+            case "10":
+                System.out.println("code for select...");
+                //enmedio
+                logic9 = new userLogic(strConnString);
+                ArrayList<userObj> userArray = logic9.getAllUsers();
+                
+                //al final
+                request.getSession().setAttribute("userarray", userArray);
+                response.sendRedirect("userMain.jsp");
+                
+                break;
+            case "11":
+                System.out.println("code for update part 1...");
+                
+                //al inicio
+                strId = request.getParameter("id");
+                iId = Integer.parseInt(strId);
+                
+                //enmedio
+                logic9 = new userLogic(strConnString);
+                userObj userObject = logic9.getUserById(iId);
+                
+                //al final
+                request.getSession().setAttribute("userobject", userObject);
+                response.sendRedirect("updateUser.jsp");
+                
+                break;
+            case "12":
+                System.out.println("code for update part 2...");
+                
+                strId = request.getParameter("id");
+                iId = Integer.parseInt(strId);
+                strNombre = request.getParameter("nombre");
+                strApellido= request.getParameter("apellido");
+                strTelefono = request.getParameter("telefono");
+                strEmail = request.getParameter("email");
+                strPass = request.getParameter("pass");
+                strType = request.getParameter("type");
+                strPlaca = request.getParameter("placa");
+                iPlaca = Integer.parseInt(strPlaca);
+                
+                System.out.println(iId);
+                System.out.println(strNombre);
+                System.out.println(strApellido);
+                System.out.println(strTelefono);
+                System.out.println(strEmail);
+                System.out.println(strPass);
+                System.out.println(strType);
+                
+                logic9 = new userLogic(strConnString);
+                rows = logic9.updateUser(iId, strNombre, strApellido, strTelefono, strEmail, strPass, strType, iPlaca);
+                
+                request.getSession().setAttribute("rows", rows);
+                response.sendRedirect("userServlet?formid=10");                
+                
+                break;
+            
             default:
                 break;
         }
