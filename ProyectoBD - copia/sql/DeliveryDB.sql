@@ -30,9 +30,9 @@ CREATE TABLE `direccion` (
   `Numero_casa` int NOT NULL,
   `id_usuario` int NOT NULL,
   PRIMARY KEY (`id_direccion`),
-  KEY `fk_direccion_info_clientes1_idx` (`id_usuario`),
-  CONSTRAINT `fk_direccion_info_clientes1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `fk_id_usuario_idx` (`id_usuario`),
+  CONSTRAINT `fk_id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `direccion` (
 
 LOCK TABLES `direccion` WRITE;
 /*!40000 ALTER TABLE `direccion` DISABLE KEYS */;
-INSERT INTO `direccion` VALUES (1,'La Libertad','Santa Tecla','San José',89,1),(2,'San Salvador','Soyapango','San José',45,3),(3,'San Salvador','Soyapango','La campanera',7,1),(4,'San Vicente','San Sebastian','Guadalupe',24,8);
+INSERT INTO `direccion` VALUES (1,'La Libertad','Santa Tecla','San José',89,1),(2,'San Salvador','Soyapango','San José',45,3),(3,'San Salvador','Soyapango','La campanera',7,1),(5,'La libertad','Zaragoza','San José Villanueva',3,1);
 /*!40000 ALTER TABLE `direccion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,7 +89,7 @@ CREATE TABLE `orden` (
   PRIMARY KEY (`id_orden`),
   KEY `fk_id_producto_idx` (`id_producto`),
   CONSTRAINT `fk_id_producto` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +98,6 @@ CREATE TABLE `orden` (
 
 LOCK TABLES `orden` WRITE;
 /*!40000 ALTER TABLE `orden` DISABLE KEYS */;
-INSERT INTO `orden` VALUES (9,3,9.00,'SE','2020-08-24 15:46:07',6),(11,4,8.00,'SE','2020-08-25 18:02:38',1),(12,5,10.00,'SE','2020-08-25 18:03:41',1),(13,1,6.00,'SE','2020-08-25 20:38:13',7);
 /*!40000 ALTER TABLE `orden` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -124,7 +123,7 @@ CREATE TABLE `orden_productos` (
   CONSTRAINT `fk_Orden_productos_Orden1` FOREIGN KEY (`id_orden`) REFERENCES `orden` (`id_orden`),
   CONSTRAINT `fk_Orden_productos_Productos1` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`),
   CONSTRAINT `fk_orden_productos_usuario1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,7 +132,6 @@ CREATE TABLE `orden_productos` (
 
 LOCK TABLES `orden_productos` WRITE;
 /*!40000 ALTER TABLE `orden_productos` DISABLE KEYS */;
-INSERT INTO `orden_productos` VALUES (9,6,9,1,1),(11,1,11,1,1),(12,1,12,1,3),(13,7,13,3,2);
 /*!40000 ALTER TABLE `orden_productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -151,7 +149,7 @@ CREATE TABLE `productos` (
   `existencia` varchar(45) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   PRIMARY KEY (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +158,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,100,2.00,'Sí','Sopa de mariscos'),(5,120,2.45,'Sí','Tacos al Pastor'),(6,150,3.00,'Sí','Churrasco'),(7,50,6.00,'Sí','Rib Eye');
+INSERT INTO `productos` VALUES (5,120,2.45,'Sí','Tacos al Pastor');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -224,12 +222,12 @@ DROP TABLE IF EXISTS `sugerencias`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sugerencias` (
-  `idsugerencias` int NOT NULL,
+  `idsugerencias` int NOT NULL AUTO_INCREMENT,
   `email` varchar(70) NOT NULL,
   `asunto` varchar(45) NOT NULL,
   `descripcion` varchar(500) NOT NULL,
   PRIMARY KEY (`idsugerencias`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,6 +236,7 @@ CREATE TABLE `sugerencias` (
 
 LOCK TABLES `sugerencias` WRITE;
 /*!40000 ALTER TABLE `sugerencias` DISABLE KEYS */;
+INSERT INTO `sugerencias` VALUES (1,'frank@gmail.com','Mala comida','Su comida no sirve');
 /*!40000 ALTER TABLE `sugerencias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -258,7 +257,7 @@ CREATE TABLE `usuario` (
   `Tipo_usuario` varchar(45) NOT NULL,
   `placa_vehiculo` int DEFAULT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -267,7 +266,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'Francisco','Murillo','72814994','frank@gmail.com','12345','cliente',1),(2,'Oscar','Franco','79631587','oscar@hotmail.com','456','root',1),(3,'Alexander','Petrov','79651285','petrov@yahoo.es','123','cliente',1),(4,'Azaela','Greenwich','79486312','aza@green.com','159','root',1),(5,'Alexei','Ivanov','79461536','alex@ivan.com','753','repartidor',789456),(6,'Vladimir ','Ikenko','72584636','vlad@hotmail.com','4986','repartidor',569624),(7,'Jesus','Barahona','75757575','jesus@gmail.com','09876','repartidor',456784),(8,'Andrea','Lopez','88888888','andrea@gmail.com','00000','cliente',1);
+INSERT INTO `usuario` VALUES (1,'Francisco','Murillo','72814994','frank@gmail.com','12345','cliente',1),(2,'Oscar','Franco','79631587','oscar@hotmail.com','456','root',1),(3,'Alexander','Petrov','79651285','petrov@yahoo.es','123','cliente',1),(4,'Azaela','Greenwich','79486312','aza@green.com','159','root',1),(9,'Florencia','Alvarez','77765675','flor@frozen.com','123','root',1);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -316,4 +315,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-25 17:17:43
+-- Dump completed on 2020-08-25 18:50:13
